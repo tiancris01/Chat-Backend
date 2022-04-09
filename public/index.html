@@ -25,9 +25,18 @@
         // Emitiendo
         socket.emit('mensaje', {nombre: 'Cliente'});
         // Escuchando
-        socket.on('mensaje', (payLoad) => {
-            console.log('Hola mundo', payLoad);
-     });
+        socket.on('mensaje', function(payLoad) {
+            console.log('Escuchando desde el', payLoad);
+        });
+        // Escuchando
+        socket.on('msn', function(payLoad) {
+            console.log('Mensaje obtenido desde fluter', payLoad);
+        });
+
+        socket.on('active-bands', function(bands){
+            console.clear
+            console.table(bands);
+        });
 
     </script>
 </body>

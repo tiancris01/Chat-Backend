@@ -2,13 +2,13 @@
 const express = require("express");
 const path = require('path');
 
-// Achivo del puerto .env
+// Archivo del puerto .env
 require('dotenv').config();
 
 // Crear una instancia de App de express
 const app = express();
 
-// Nose Server
+// Crea el Server de Node
 const server = require('http').createServer(app);
 module.exports.io = require('socket.io')(server);
 require('./sokets/sockets');
