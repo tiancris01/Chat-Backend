@@ -16,10 +16,15 @@ const UsuarioSchema = Schema({
     },
     online:{
         type: Boolean,
-        require: false
+        default: false
     },
 
 });
 
+UsuarioSchema.method('toJSON', function(){
+    const{__v, _id, contraseña, ...object}=this.toObject();
+    object.uid = _id;
+    return object;
+});
 
 module.exports = model('Usuario', UsuarioSchema);

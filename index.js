@@ -20,17 +20,15 @@ module.exports.io = require('socket.io')(server);
 require('./sokets/sockets');
 
 
-
-
 //   server.listen(3000);
 
 // path public
 const publicPhat = path.resolve(__dirname,'public');
-
 app.use(express.static(publicPhat));
 
 // Mis Rutas
 app.use('/api/login', require ('./routes/auth'));
+app.use('/api/usuarios', require ('./routes/usuarios'));
 
 // abrir puerto para que empiece a escuchar peticiones 
 server.listen(process.env.PORT,(err)=>{

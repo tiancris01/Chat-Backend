@@ -1,4 +1,8 @@
-const {Router, response} = require('express');
+/* 
+    Path: api/login
+*/
+
+const {Router} = require('express');
 const { check } = require('express-validator');
 
 const {crearUsuario, login, renewToken } = require('../controllers/authC');
@@ -7,9 +11,9 @@ const { validarCampos } = require('../middlewares/validar_Campos');
 
 
 
-const route =  Router();
+const router =  Router();
 
-route.post('/new',[
+router.post('/new',[
     check('nombre','El nombre es obligatorio').not().isEmpty(),
     check('contraseña','La contraseña es obligatoria').not().isEmpty(),
     check('email','El correo es obligatorio').isEmail(),
@@ -17,13 +21,13 @@ route.post('/new',[
 ], crearUsuario);
 
 
-route.post('/',[
-    check('contraseña','La contraseña es obligatoria').not().isEmpty(),
+router.post('/',[
+    check('contraseña','La contraseña no es valida').not().isEmpty(),
     check('email','El correo es obligatorio').isEmail(),
     validarCampos
 ], login);
 
-route.get('/renew', validarJWT ,renewToken);
+router.get('/renew', validarJWT ,renewToken);
 
 
-module.exports = route;
+module.exports = router;
