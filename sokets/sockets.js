@@ -1,6 +1,6 @@
 const { comprobarJWT } = require('../helpers/jwt');
 const{ io } = require('../index');
-const {userConnected,userDisconnected} = require('../controllers/socketC');
+const {userConnected,userDisconnected, grabarMensaje} = require('../controllers/socketC');
 
 io.on('connection',  (client) => {
     console.log('Cliente Conectado');
@@ -15,8 +15,10 @@ io.on('connection',  (client) => {
     //Ingresar el usuario a una sala privada through Client.Id == uid
     client.join(uid);
 
-    client.on('msg_private', (payload)=>{
+    client.on('msg_private', async (payload)=>{
+      await grabarMensaje(payload);
       console.log(payload);
+      io.to(payload.to).emit('msg_private', payload);
     })
 
 

@@ -29,6 +29,7 @@ app.use(express.static(publicPhat));
 // Mis Rutas
 app.use('/api/login', require ('./routes/auth'));
 app.use('/api/usuarios', require ('./routes/usuarios'));
+app.use('/api/mensajes', require ('./routes/mensajes'));
 
 // abrir puerto para que empiece a escuchar peticiones 
 server.listen(process.env.PORT,(err)=>{
